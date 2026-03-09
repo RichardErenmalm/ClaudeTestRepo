@@ -1,0 +1,6 @@
+@ClaudeTestRepo.API_HostAddress = http://localhost:5230
+
+GET {{ClaudeTestRepo.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
