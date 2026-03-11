@@ -17,3 +17,10 @@ This is a .NET 9 minimal API solution with a single project:
 - **ClaudeTestRepo.API** — ASP.NET Core Web API using minimal API pattern (no controllers). All endpoints are defined inline in `Program.cs`. The `WeatherForecast` record is also defined in `Program.cs`, with a duplicate class in `Models/WeatherForecast.cs`.
 
 The API runs on `http://localhost:5230` (or `https://localhost:7003` with the https profile).
+
+## Database
+
+- **Server:** `localhost\SQLEXPRESS`
+- **Database:** `ClaudeTestRepo`
+- **Auth:** Windows Authentication
+- **Access via CLI:** `sqlcmd -S "localhost\SQLEXPRESS" -E -d ClaudeTestRepo`
