@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
 
     public DbSet<List> Lists { get; set; }
     public DbSet<ListItem> ListItems { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +30,12 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<ListItem>(entity =>
         {
             entity.HasKey(li => li.Id);
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(u => u.Id);
+            entity.HasIndex(u => u.Username).IsUnique();
         });
     }
 }

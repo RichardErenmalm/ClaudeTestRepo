@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getLists, createList, deleteList } from "../api/api";
 import type { ListDto } from "../api/api";
+import { useAuth } from "../context/AuthContext";
 
 export default function HomePage() {
   const [lists, setLists] = useState<ListDto[]>([]);
   const [newListName, setNewListName] = useState("");
   const navigate = useNavigate();
+  const { username, logout } = useAuth();
 
   useEffect(() => {
     getLists().then(setLists);
@@ -28,8 +30,18 @@ export default function HomePage() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h1 style={styles.title}>My Lists</h1>
-        <p style={styles.subtitle}>Organize your tasks effortlessly</p>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div>
+            <h1 style={styles.title}>My Lists</h1>
+            <p style={styles.subtitle}>Welcome, {username}</p>
+          </div>
+          <button
+            onClick={() => { logout(); navigate("/"); }}
+            style={styles.logoutBtn}
+          >
+            Log Out
+          </button>
+        </div>
       </header>
 
       <div style={styles.createBar}>
@@ -204,6 +216,16 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: "var(--primary)",
     borderRadius: 2,
     transition: "width 0.3s ease",
+  },
+  logoutBtn: {
+    padding: "0.6rem 1.2rem",
+    backgroundColor: "transparent",
+    color: "var(--text-muted)",
+    border: "1px solid var(--border)",
+    borderRadius: "var(--radius)",
+    fontSize: "0.9rem",
+    cursor: "pointer",
+    transition: "all 0.2s",
   },
   deleteBtn: {
     background: "none",
