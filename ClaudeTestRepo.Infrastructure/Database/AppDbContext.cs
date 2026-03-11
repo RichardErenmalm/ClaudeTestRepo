@@ -22,7 +22,8 @@ public class AppDbContext : DbContext
             entity.HasKey(l => l.Id);
             entity.HasMany(l => l.Items)
                   .WithOne(li => li.List)
-                  .HasForeignKey(li => li.ListId);
+                  .HasForeignKey(li => li.ListId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<ListItem>(entity =>
